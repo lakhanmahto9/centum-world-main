@@ -23,7 +23,7 @@ Contact Information: Clear contact information, including our company's address,
 To install and set up the Company Portfolio Website locally, follow these steps:
 Ensure you have Node.js installed on your machine.
 Navigate to the project directory in your terminal.
-Run "npm install" to install the necessary dependencies.
+Run "npm install --legacy-peer-deps @react-three/fiber @react-three/drei maath react-tilt react-vertical-timeline-component @emailjs/browser framer-motion react-router-dom" to install the necessary dependencies.
 # Usage
 To run the Company Portfolio Website locally, execute the following command:
 npm run dev
