@@ -1,12 +1,13 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
-
+import { Input, Button, Select } from "antd";
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
 import MapContainer from "./MapContainer";
-import {VscSend} from "react-icons/vsc"
+import { VscSend } from "react-icons/vsc";
+const { Option } = Select;
 
 const Contact = () => {
   const formRef = useRef();
@@ -18,6 +19,7 @@ const Contact = () => {
 
   const [loading, setLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+  const [data, setData] = useState({ lat: null, lng: null });
 
   const handleChange = (e) => {
     const { target } = e;
@@ -66,21 +68,19 @@ const Contact = () => {
       );
   };
 
-  const getLocation = () => {
-    // Replace the logic below with your own implementation
-    if (selectedOption === "kolkata") {
-      return "Kolkata Address";
-    } else if (selectedOption === "banglore") {
-      return "108,27th Main,HSR Layout,Sector-2,Bangalore,KA 560102, India";
-    } else if (selectedOption === "jharkhand") {
-      return "Jharkhand Address";
-    } else {
-      return "";
+  const chageLocation = (value) => {
+    if ("Kolkata" === value) {
+      setData({
+        lat: 22.621105,
+        lng: 88.464406,
+      });
     }
-  };
-
-  const handleOptionChange = (e) => {
-    setSelectedOption(e.target.value);
+    if ("Banglore" === value) {
+      setData({
+        lat: 12.910055,
+        lng: 77.652024,
+      });
+    }
   };
 
   return (
@@ -139,7 +139,7 @@ const Contact = () => {
               className="bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary flex items-center gap-2"
             >
               {loading ? "Sending..." : "Send"}
-              <VscSend/>
+              <VscSend />
             </button>
           </form>
         </motion.div>
@@ -151,17 +151,19 @@ const Contact = () => {
           <div className="map-container flex flex-col gap-y-5">
             <h1 className="text-5xl font-extrabold">Our Company Location</h1>
             <div>
-              <select value={selectedOption} onChange={handleOptionChange} className="bg-primary font-bold sm:flex items-center w-[200px] rounded-md outline-none hidden">
-                <option value="">Select an option</option>
-                <option value="kolkata">Kolkata</option>
-                <option value="banglore">Banglore</option>
-                <option value="jharkhand">Jharkhand</option>
-              </select>
-              {selectedOption && <p className="font-bold">Selected Location: <br /> {getLocation()}</p>}
+              <Select
+                defaultValue="Banglore"
+                style={{ width: 120, marginBottom: 5}}
+                onChange={chageLocation}
+              >
+                <Option value="Kolkata">Kolkata</Option>
+                <Option value="Banglore">Banglore</Option>
+                <Option value="Jharkhand">Jharkhand</Option>
+              </Select>
             </div>
 
             <div>
-              <MapContainer />
+            <MapContainer data={data} />
             </div>
           </div>
         </motion.div>
