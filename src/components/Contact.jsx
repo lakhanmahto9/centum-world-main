@@ -3,12 +3,10 @@ import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
 import { styles } from "../styles";
-import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
-import { Select } from "antd";
 import MapContainer from "./MapContainer";
-const { Option } = Select;
+import {VscSend} from "react-icons/vsc"
 
 const Contact = () => {
   const formRef = useRef();
@@ -19,6 +17,7 @@ const Contact = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
 
   const handleChange = (e) => {
     const { target } = e;
@@ -67,87 +66,107 @@ const Contact = () => {
       );
   };
 
+  const getLocation = () => {
+    // Replace the logic below with your own implementation
+    if (selectedOption === "kolkata") {
+      return "Kolkata Address";
+    } else if (selectedOption === "banglore") {
+      return "108,27th Main,HSR Layout,Sector-2,Bangalore,KA 560102, India";
+    } else if (selectedOption === "jharkhand") {
+      return "Jharkhand Address";
+    } else {
+      return "";
+    }
+  };
+
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
   return (
-    <div
-      className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}
-    >
-      <motion.div
-        variants={slideIn("left", "tween", 0.2, 1)}
-        className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
+    <>
+      <div
+        className={`xl:mt-12 flex xl:flex-row flex-col gap-10 overflow-hidden`}
       >
-        <p className={styles.sectionSubText}>Get in touch</p>
-        <h3 className={styles.sectionHeadText}>Contact.</h3>
-
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className="mt-12 flex flex-col gap-8"
+        <motion.div
+          variants={slideIn("left", "tween", 0.2, 1)}
+          className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
         >
-          <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your Name</span>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="Your Name"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-            />
-          </label>
-          <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your email</span>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="Email address"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-            />
-          </label>
-          <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your Message</span>
-            <textarea
-              rows={7}
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              placeholder="Your message"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-            />
-          </label>
+          <p className={styles.sectionSubText}>Get in touch</p>
+          <h3 className={styles.sectionHeadText}>Contact.</h3>
 
-          <button
-            type="submit"
-            className="bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary"
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="mt-12 flex flex-col gap-8"
           >
-            {loading ? "Sending..." : "Send"}
-          </button>
-        </form>
-      </motion.div>
+            <label className="flex flex-col">
+              <span className="text-white font-medium mb-4">Your Name</span>
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                placeholder="Your Name"
+                className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+              />
+            </label>
+            <label className="flex flex-col">
+              <span className="text-white font-medium mb-4">Your email</span>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="Email address"
+                className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+              />
+            </label>
+            <label className="flex flex-col">
+              <span className="text-white font-medium mb-4">Your Message</span>
+              <textarea
+                rows={7}
+                name="message"
+                value={form.message}
+                onChange={handleChange}
+                placeholder="Your message"
+                className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+              />
+            </label>
 
-      <motion.div
-        variants={slideIn("right", "tween", 0.2, 1)}
-        className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
-      >
-        <div className="map-container col-span-2">
-          <h1 className="text-5xl font-extrabold">
-            Our Company Location
-          </h1>
-          <Select
-            defaultValue="Banglore"
-            style={{ width: 120, marginBottom: 5 }}
-          >
-            <Option value="Kolkata">Kolkata</Option>
-            <Option value="Banglore">Banglore</Option>
-            <Option value="Jharkhand">Jharkhand</Option>
-          </Select>
-          <div>
-            <MapContainer />
+            <button
+              type="submit"
+              className="bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary flex items-center gap-2"
+            >
+              {loading ? "Sending..." : "Send"}
+              <VscSend/>
+            </button>
+          </form>
+        </motion.div>
+
+        <motion.div
+          variants={slideIn("right", "tween", 0.2, 1)}
+          className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
+        >
+          <div className="map-container flex flex-col gap-y-5">
+            <h1 className="text-5xl font-extrabold">Our Company Location</h1>
+            <div>
+              <select value={selectedOption} onChange={handleOptionChange} className="bg-primary font-bold sm:flex items-center w-[200px] rounded-md outline-none hidden">
+                <option value="">Select an option</option>
+                <option value="kolkata">Kolkata</option>
+                <option value="banglore">Banglore</option>
+                <option value="jharkhand">Jharkhand</option>
+              </select>
+              {selectedOption && <p className="font-bold">Selected Location: <br /> {getLocation()}</p>}
+            </div>
+
+            <div>
+              <MapContainer />
+            </div>
           </div>
-        </div>
-      </motion.div>
-    </div>
+        </motion.div>
+      </div>
+    </>
   );
 };
 

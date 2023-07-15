@@ -42,19 +42,19 @@ export const navLinks = [
 
 const services = [
   {
-    title: "Web Developer",
+    title: "Trading Platform",
     icon: web,
   },
   {
-    title: "React Native Developer",
+    title: "Market Analysis and Research",
     icon: mobile,
   },
   {
-    title: "Backend Developer",
+    title: "Education and Training",
     icon: backend,
   },
   {
-    title: "Content Creator",
+    title: "Account Management and Support",
     icon: creator,
   },
 ];
@@ -118,7 +118,7 @@ const experiences = [
   {
     title: "React.js Developer",
     company_name: "Starbucks",
-    icon: starbucks,
+    // icon: starbucks,
     iconBg: "#383E56",
     date: "March 2020 - April 2021",
     points: [
@@ -131,7 +131,7 @@ const experiences = [
   {
     title: "React Native Developer",
     company_name: "Tesla",
-    icon: tesla,
+    // icon: tesla,
     iconBg: "#E6DEDD",
     date: "Jan 2021 - Feb 2022",
     points: [
@@ -144,7 +144,7 @@ const experiences = [
   {
     title: "Web Developer",
     company_name: "Shopify",
-    icon: shopify,
+    // icon: shopify,
     iconBg: "#383E56",
     date: "Jan 2022 - Jan 2023",
     points: [
@@ -157,7 +157,7 @@ const experiences = [
   {
     title: "Full stack Developer",
     company_name: "Meta",
-    icon: meta,
+    // icon: meta,
     iconBg: "#E6DEDD",
     date: "Jan 2023 - Present",
     points: [
